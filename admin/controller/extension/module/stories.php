@@ -51,6 +51,12 @@ class ControllerExtensionModuleStories extends Controller {
 			$data['error_height'] = '';
 		}
 
+        if (isset($this->error['entry_type'])) {
+            $data['error_entry_type'] = $this->error['entry_type'];
+        } else {
+            $data['error_entry_type'] = '';
+        };
+
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -107,21 +113,13 @@ class ControllerExtensionModuleStories extends Controller {
 
 		$data['banners'] = $this->model_design_banner->getBanners();
 
-		if (isset($this->request->post['width'])) {
-			$data['width'] = $this->request->post['width'];
-		} elseif (!empty($module_info)) {
-			$data['width'] = $module_info['width'];
-		} else {
-			$data['width'] = '';
-		}
-
-		if (isset($this->request->post['height'])) {
-			$data['height'] = $this->request->post['height'];
-		} elseif (!empty($module_info)) {
-			$data['height'] = $module_info['height'];
-		} else {
-			$data['height'] = '';
-		}
+        if (isset($this->request->post['entry_type'])) {
+            $data['entry_type'] = $this->request->post['entry_type'];
+        } elseif (!empty($module_info['entry_type'])) {
+            $data['entry_type'] = $module_info['entry_type'];
+        } else {
+            $data['entry_type'] = '';
+        }
 
 		if (isset($this->request->post['status'])) {
 			$data['status'] = $this->request->post['status'];
@@ -130,6 +128,14 @@ class ControllerExtensionModuleStories extends Controller {
 		} else {
 			$data['status'] = '';
 		}
+
+        if (isset($this->request->post['max_qty'])) {
+            $data['max_qty'] = $this->request->post['max_qty'];
+        } elseif (!empty($module_info['max_qty'])) {
+            $data['max_qty'] = $module_info['max_qty'];
+        } else {
+            $data['max_qty'] = '';
+        }
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
