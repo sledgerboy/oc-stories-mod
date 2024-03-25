@@ -13,7 +13,7 @@ class ControllerExtensionModuleStories extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('setting/module');
+		$this->load->model('extension/module');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			if (!isset($this->request->get['module_id'])) {
@@ -151,14 +151,6 @@ class ControllerExtensionModuleStories extends Controller {
 
 		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 64)) {
 			$this->error['name'] = $this->language->get('error_name');
-		}
-
-		if (!$this->request->post['width']) {
-			$this->error['width'] = $this->language->get('error_width');
-		}
-
-		if (!$this->request->post['height']) {
-			$this->error['height'] = $this->language->get('error_height');
 		}
 
 		return !$this->error;
